@@ -1,5 +1,8 @@
 import sys,time
 
+import InputValidation, main
+
+
 def slow_print(message):
     for char in message:
         sys.stdout.write(char)
@@ -21,42 +24,36 @@ class Tareth():
             self.contract_and_bottle_conversation()
 
     def standard_conversation(self):
-        self.start = "\n[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n   2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n     5 - Leave\n"
-        slow_print(self.start)
-        self.choice = input("> ")
-        while self.choice not in ["1","2","3","4","5"]:
-            print("Invalid, try again")
-            self.reply = input("> ")
-        if self.choice == "1":
+        start = "\n[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n   2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n     5 - Leave\n"
+        slow_print(start)
+        choice = InputValidation.check5()
+        if choice == "1":
             self.issac_rel()
-        elif self.choice == "2":
+        elif choice == "2":
             self.william_rel()
-        elif self.choice == "3":
+        elif choice == "3":
             self.mia_rel()
-        elif self.choice == "4":
+        elif choice == "4":
             self.janet_rel()
         else:
-            self.main_room()
+            main.MainRoom.main_room()
 
     def bottle_conversation(self):
-        self.start = "[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n    2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n    5 - Ask about the bottle\n   6 - Leave"
-        slow_print(self.start)
-        self.choice = input("> ")
-        while self.choice not in ["1", "2", "3", "4","5","6"]:
-            print("Invalid, try again")
-            self.reply = input("> ")
-        if self.choice == "1":
+        start = "[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n    2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n    5 - Ask about the bottle\n   6 - Leave"
+        slow_print(start)
+        choice = InputValidation.check6()
+        if choice == "1":
             self.issac_rel()
-        elif self.choice == "2":
+        elif choice == "2":
             self.william_rel()
-        elif self.choice == "3":
+        elif choice == "3":
             self.mia_rel()
-        elif self.choice == "4":
+        elif choice == "4":
             self.janet_rel()
-        elif self.choice == "5":
+        elif choice == "5":
             self.bottle()
         else:
-            self.main_room()
+            main.MainRoom.main_room()
 
     def contract_conversation(self):
         self.start = "[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n    2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n    5 - Ask about the contract\n   6 - Leave\n"
@@ -76,7 +73,7 @@ class Tareth():
         elif self.choice == "5":
             self.contract()
         else:
-            self.main_room()
+            main.MainRoom.main_room()
 
     def contract_and_bottle_conversation(self):
         self.start = "[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n    2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n    5 - Ask about the bottle\n   6 - Ask about the contract\n   6 - Leave\n"
@@ -98,7 +95,7 @@ class Tareth():
         elif self.choice == "6":
             self.contract()
         else:
-            self.main_room()
+            main.MainRoom.main_room()
 
 
     def issac_rel(self):
@@ -171,7 +168,110 @@ class Tareth():
         self.standard_conversation()
 
     def bottle(self):
-        print("WIP")
+        response = """
+[YOU]: I found this bottle in his study alongside a congratulations card.
+
+[TARETH]: Oh, that. Yeah, we used to drink this around the office all the time - usually to celebrate a big score or some new deal we cooked up. Those were the days. I thought that this might remind of that time, so we could go back.
+    1 - Ask why he was so sentimental
+    2 - Ask why the seal was openned but the bottle was full
+    3 - Ask if he wants a drink
+"""
+        slow_print(response)
+        reply = InputValidation.check3()
+        if reply == "1":
+            response = """
+[TARETH]: I dunno. I guess when you've known someone a certain way for so long, you always see them like that. I missed my business partner, but more importantly, I missed my friend. You get me, right?
+    1 - Yes
+    2 - No
+"""
+            slow_print(response)
+            choice = InputValidation.check2()
+            if choice == "1":
+                response = "I knew you would. Now, if you wouldn't mind, I'd like to be alone for a bit."
+            else:
+                response = "Well, maybe one day you will. Now, if you wouldn't mind, I'd like to be alone for a bit."
+            slow_print(response)
+        elif reply == "2":
+            response = """
+[TARETH]: Issac was always picky with when he drank. Had to be a certain way, a certain temperature and with certain additions. He was a particular man; I guess that's what made him so good at business. Still, it's a shame he didn't drink it when he had the chance.
+    1 - Ask what will happen with the company now
+    2 - Ask what he will do now
+            """
+            slow_print(response)
+            choice = InputValidation.check2()
+            if choice == "1":
+                response = """
+[YOU]: So now that the joint owner is dead, what will happen with the business now?
+
+[TARETH]: Well, that depends. If the prodigal son rises to the occassion, I'll sell my stocks and retire some place nice and warm while my empire falls. If not, then I'll continue in his name. Let's hope I don't have to wait long. That information should be in his will, though I have no clue where he hid it. Now, if you wouldn't mind, I'd like to be alone for a bit."""
+            else:
+                response = """
+[YOU]: So what's next for you?
+
+[TARETH]: Well all eyes are going to be on me. I'll have to hold a press briefing this weekend and clear the air. After that, whoever gets the stock gets the stock. That information should be in his will, though I have no clue where he hid it. Now, if you wouldn't mind, I'd like to be alone for a bit."""
+            slow_print(response)
+        else:
+            response = """
+No thanks. That bottle was meant to be for him - it would be bad of me to take it from him. Now, if you wouldn't mind, I'd like to be alone for a bit.
+"""
+            slow_print(response)
+
+
 
     def contract(self):
-        print("WIP")
+        response = """
+[YOU]: I found this contract in his study safe. It has your signature on it, but not his. Care to explain?
+
+[TARETH]: That was a business deal that Issac didn't particularly like. He said he found it too shady to stake our brand name on it. We made an agreement that both of us have to sign on a deal for it to be accepted, but as you can tell, it never went through. Shame it never did.
+    1 - Ask why
+    2 - Ask if there were more like it
+    3 - Ask why it was in his safe
+"""
+        slow_print(response)
+        choice = InputValidation.check3()
+        if choice == "1":
+            self.contract_reasoning()
+        elif choice == "2":
+            self.contract_questioning()
+        else:
+            self.contract_safe()
+
+    def contract_reasoning(self):
+        response = """
+[YOU]: What was so special about this deal?
+
+[TARETH]: It was with another large firm in the country, we were always in competition so this deal seemed like a perfect way to pour our efforts in the market together. Issac didn't like it because it would mean sacrificing some of our worker benefits for the sake of keeping the profit margins. I assured him this would only be a temporary condition, but even that put him off.
+    1 - Ask why he thought it was okay to do that?
+    2 - Ask how it ended up in his safe
+"""
+        slow_print(response)
+        choice = InputValidation.check2()
+        if choice == "1":
+            response = """
+[YOU]: You were seriously going to cut worker benefits to compete? Why?
+
+[TARETH]: Because that's business. We have to make hard decisions to reach the top. Issac knew this, but he had a good heart. To be honest, I didn't want to have to do it myself, but the deal rided on us being willing to sacrifice. 
+    1 - Say you understand
+    2 - Say you don't agree
+"""
+            choice = InputValidation.check2()
+            if choice == "1":
+                response = """
+[YOU]: If it was only temporary then I don't see the problem/
+
+[TARETH]: Exactly my point. I mean it was nothing massive, just a few bonuses here and there and it would have been fine. They wouldn't have missed them. Now, if you don't mind, I'd like to be left alone.
+        """
+            else:
+                response = """
+[YOU]: I can't believe you'd think that's okay.
+
+[TARETH]: Easy there. I'm not talking about slavery. It would have been nothing massive, just a few bonuses here and there and it would have been fine. They wouldn't have missed them. Now, if you don't mind, I'd like to be left alone.
+"""
+            slow_print(response)
+        else:
+            response = """
+[YOU]: So what's next for you?
+
+[TARETH]: Well all eyes are going to be on me. I'll have to hold a press briefing this weekend and clear the air. After that, whoever gets the stock gets the stock. That information should be in his will, though I have no clue where he hid it. Now, if you wouldn't mind, I'd like to be alone for a bit.
+"""
+        slow_print(response)

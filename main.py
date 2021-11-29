@@ -1,4 +1,4 @@
-import sys,time,os, Tareth, Mia, William, Janet, Study, Kitchen, Bedroom
+import sys,time,os, Tareth, Mia, William, Janet, Study, Kitchen, Bedroom, InputValidation
 
 #use for main room
 
@@ -6,7 +6,7 @@ def slow_print(message):
     for char in message:
         sys.stdout.write(char)
         sys.stdout.flush()
-        time.sleep(0.025)
+        time.sleep(0.04)
 
 class MainRoom():
 
@@ -18,7 +18,7 @@ class MainRoom():
         self.main_room(study_key,safe_pin,contract,bottle)
 
     def main_room(self,study_key,safe_pin,contract,bottle):
-        self.prompt = """
+        prompt = """
 You are in the dining room -what would you like to do?
     1 - Talk to William
     2 - Talk to Tareth
@@ -26,22 +26,20 @@ You are in the dining room -what would you like to do?
     4 - Talk to Andrew
     5 - Talk to Janet
     6 - Head out to the hallway\n"""
-        slow_print(self.prompt)
-        self.choice = input("> ")
-        while self.choice not in ["1", "2", "3", "4", "5", "6"]:
-            self.choice = input("Invalid - Try again \n> ")
-        if self.choice == "1":
+        slow_print(prompt)
+        choice = InputValidation.check6()
+        if choice == "1":
             #william()
             print("PLACE")
-        elif self.choice == "2":
-            Tareth.Tareth(contract,bottle)
-        elif self.choice == "3":
+        elif choice == "2":
+            Tareth.Tareth(contract, bottle)
+        elif choice == "3":
             #mia()
             print("PLACE")
-        elif self.choice == "4":
+        elif choice == "4":
             #andrew()
             print("PLACE")
-        elif self.choice == "5":
+        elif choice == "5":
             #janet(safe_pin)
             print("PLACE")
         else:
@@ -49,16 +47,14 @@ You are in the dining room -what would you like to do?
             print("PLACE")
 
     def hallway(self):
-        self.prompt = """
+        prompt = """
     You are now in the hallway - where would you like to go?
         1 - The kitchen
         2 - The Study
         3 - The Bedroom
         4 - Go Back\n"""
-        slow_print(self.prompt)
-        self.choice = input("> ")
-        while self.choice not in ["1", "2", "3", "4"]:
-            self.choice = input("Invalid - please try again\n> ")
+        slow_print(prompt)
+        choice = InputValidation.check4()
         if self.choice == "1":
             kitchen()
         elif self.choice == "2":
@@ -72,4 +68,4 @@ study_key = 0
 safe_pin = 0
 contract = 0
 bottle = 0
-MainRoom(study_key,safe_pin,contract,bottle)
+MainRoom(study_key, safe_pin, contract, bottle)
