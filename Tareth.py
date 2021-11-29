@@ -275,3 +275,51 @@ No thanks. That bottle was meant to be for him - it would be bad of me to take i
 [TARETH]: Well all eyes are going to be on me. I'll have to hold a press briefing this weekend and clear the air. After that, whoever gets the stock gets the stock. That information should be in his will, though I have no clue where he hid it. Now, if you wouldn't mind, I'd like to be alone for a bit.
 """
         slow_print(response)
+
+    def contract_questioning(self):
+        response = """
+[YOU]: This can't be only kind of contract like this that came across your desk. What was so special about this one?
+
+[TARETH]: Like I said, it was in partnership with one of the biggest firms in the country. This was our shot to grow beyond our wildest dreams. I guess it was never meant to be.
+    1 - Ask if he thinks that Issac would have ever changed his mind
+    2 - Say you side with him
+"""
+        slow_print(response)
+        choice = InputValidation.check2()
+        if choice == "1":
+            response = """
+[YOU]: Do you think he would have ever changed his mind?
+
+[TARETH]: Who? Issac? No. Once his mind was made, nothing could change it. If there's one thing we both had in common, it was that we were both stubborn. Now, if you wouldn't mind, I'd like to be alone for a bit.
+"""
+        else:
+            response = """
+[YOU]: I have to say. If this meant you'd get in with your biggest competitors, then I would have signed it.
+
+[TARETH]: Glad we see eye to eye on this. Shame that me and Issac never did. It would have been easier to boil the salt from the ocean than to change his mind. Now, if you wouldn't mind, I'd like to be alone for a bit.
+"""
+        slow_print(response)
+
+    def contract_safe(self):
+        response = """
+[YOU]: If he hated this contract so much, then why keep it?
+
+[TARETH]: Issac was meticulous, liked to have everything in little filing cabinets and colour-coded folders. He probably wanted to send it to the office to make sure his records weren't incomplete.
+    1 - Ask why he waited so long to do it
+    2 - Ask if he kept all of his rejected contracts
+"""
+        slow_print(response)
+        choice = InputValidation.check2()
+        if choice == "1":
+            response = """
+[YOU]: If he was that meticulous, then why wait so long to have it put away? It's dated for nearly three weeks ago.
+
+[TARETH]: Issac worked from home most days ever since he got engaged. He wanted to spend more time with his wife. He would only come in when he had to. Board meetings, contract signings, things that worked better when the joint owner wasn't video calling in. Now, if you wouldn't mind, I'd like to be alone for a bit.
+"""
+        else:
+            response = """
+[YOU]: Did he do this with everything?
+
+[TARETH]: Pretty much. There was nothing worthless in his eyes. Every failure was a lesson learnt and every failed deal was a reminder that our values came first. You have to admire him for that.
+"""
+        slow_print(response)
