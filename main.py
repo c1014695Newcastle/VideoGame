@@ -1,4 +1,6 @@
 import sys, time, os
+
+import Inventory
 import Tareth, Mia, William, Janet, Kitchen, Bedroom, InputValidation
 
 
@@ -28,7 +30,8 @@ You are in the dining room -what would you like to do?
     4 - Talk to Andrew
     5 - Talk to Janet
     6 - Head out to the hallway
-    7 - ACCUSE\n"""
+    7 - View Inventory
+    8 - ACCUSE\n"""
     slow_print(prompt)
     choice = InputValidation.check7()
     if choice == "1":
@@ -48,6 +51,8 @@ You are in the dining room -what would you like to do?
     elif choice == "6":
         # self.hallway()
         print("PLACE")
+    elif choice == "7":
+        Inventory.InventoryViewer(inventory)
     else:
         final_choice = input("""
 WARNING: THERE IS NO GOING BACK FROM THIS CHOICE - ARE YOU SURE THAT YOU ARE READY?

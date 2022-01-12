@@ -9,6 +9,31 @@ def slow_print(message):
         time.sleep(0.025)
 
 
+def contract_safe():
+    response = """
+[YOU]: If he hated this contract so much, then why keep it?
+
+[TARETH]: Issac was meticulous, liked to have everything in little filing cabinets and colour-coded folders. He probably wanted to send it to the office to make sure his records weren't incomplete.
+1 - Ask why he waited so long to do it
+2 - Ask if he kept all of his rejected contracts
+"""
+    slow_print(response)
+    choice = InputValidation.check2()
+    if choice == "1":
+        response = """
+[YOU]: If he was that meticulous, then why wait so long to have it put away? It's dated for nearly three weeks ago.
+
+[TARETH]: Issac worked from home most days ever since he got engaged. He wanted to spend more time with his wife. He would only come in when he had to. Board meetings, contract signings, things that worked better when the joint owner wasn't video calling in. Now, if you wouldn't mind, I'd like to be alone for a bit.
+"""
+    else:
+        response = """
+[YOU]: Did he do this with everything?
+
+[TARETH]: Pretty much. There was nothing worthless in his eyes. Every failure was a lesson learnt and every failed deal was a reminder that our values came first. You have to admire him for that.
+"""
+    slow_print(response)
+
+
 class Tareth:
 
     def __init__(self, inventory):
@@ -189,9 +214,9 @@ class Tareth:
             slow_print(response)
             choice = InputValidation.check2()
             if choice == "1":
-                response = "I knew you would. Now, if you wouldn't mind, I'd like to be alone for a bit."
+                response = "[TARETH]: I knew you would. Now, if you wouldn't mind, I'd like to be alone for a bit."
             else:
-                response = "Well, maybe one day you will. Now, if you wouldn't mind, I'd like to be alone for a bit."
+                response = "[TARETH]: Well, maybe one day you will. Now, if you wouldn't mind, I'd like to be alone for a bit."
             slow_print(response)
         elif reply == "2":
             response = """
@@ -234,7 +259,7 @@ class Tareth:
         elif choice == "2":
             self.contract_questioning()
         else:
-            self.contract_safe()
+            contract_safe()
 
     def contract_reasoning(self, inventory):
         response = """
@@ -297,29 +322,5 @@ class Tareth:
 [YOU]: I have to say. If this meant you'd get in with your biggest competitors, then I would have signed it.
 
 [TARETH]: Glad we see eye to eye on this. Shame that me and Issac never did. It would have been easier to boil the salt from the ocean than to change his mind. Now, if you wouldn't mind, I'd like to be alone for a bit.
-"""
-        slow_print(response)
-
-    def contract_safe(self):
-        response = """
-[YOU]: If he hated this contract so much, then why keep it?
-
-[TARETH]: Issac was meticulous, liked to have everything in little filing cabinets and colour-coded folders. He probably wanted to send it to the office to make sure his records weren't incomplete.
-    1 - Ask why he waited so long to do it
-    2 - Ask if he kept all of his rejected contracts
-"""
-        slow_print(response)
-        choice = InputValidation.check2()
-        if choice == "1":
-            response = """
-[YOU]: If he was that meticulous, then why wait so long to have it put away? It's dated for nearly three weeks ago.
-
-[TARETH]: Issac worked from home most days ever since he got engaged. He wanted to spend more time with his wife. He would only come in when he had to. Board meetings, contract signings, things that worked better when the joint owner wasn't video calling in. Now, if you wouldn't mind, I'd like to be alone for a bit.
-"""
-        else:
-            response = """
-[YOU]: Did he do this with everything?
-
-[TARETH]: Pretty much. There was nothing worthless in his eyes. Every failure was a lesson learnt and every failed deal was a reminder that our values came first. You have to admire him for that.
 """
         slow_print(response)
