@@ -1,5 +1,4 @@
-import sys,time
-
+import sys, time
 import InputValidation, main
 
 
@@ -9,36 +8,43 @@ def slow_print(message):
         sys.stdout.flush()
         time.sleep(0.025)
 
-class Tareth():
 
-    def __init__(self, contract, bottle):
+class Tareth:
+
+    def __init__(self, inventory):
         self.prompt = "\nTareth stands off in a darkly lit corner of the room, his eyes fixed on the table and the body of his former business partner. It hadn't been long, but you could already see the pain in his eyes.\n"
         slow_print(self.prompt)
-        if bottle == 0 and contract == 0:
-            self.standard_conversation()
-        elif bottle == 0 and contract == 1:
-            self.bottle_conversation()
-        elif bottle == 1 and contract == 0:
-            self.contract_conversation()
-        else:
-            self.contract_and_bottle_conversation()
+        self.conversation_picker(inventory)
 
-    def standard_conversation(self):
+    def conversation_picker(self, inventory):
+        if inventory["bottle"] == 0 and inventory["contract"] == 0:
+            self.standard_conversation(inventory)
+        elif inventory["bottle"] == 1 and inventory["contract"] == 0:
+            self.bottle_conversation(inventory)
+        elif inventory["bottle"] == 0 and inventory["contract"] == 1:
+            self.contract_conversation(inventory)
+        else:
+            self.contract_and_bottle_conversation(inventory)
+
+    def standard_conversation(self, inventory):
         start = "\n[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n   2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n     5 - Leave\n"
         slow_print(start)
         choice = InputValidation.check5()
         if choice == "1":
             self.issac_rel()
+            main.main_room(inventory)
         elif choice == "2":
             self.william_rel()
+            main.main_room(inventory)
         elif choice == "3":
             self.mia_rel()
+            main.main_room(inventory)
         elif choice == "4":
             self.janet_rel()
         else:
-            main.MainRoom.main_room()
+            main.main_room(inventory)
 
-    def bottle_conversation(self):
+    def bottle_conversation(self, inventory):
         start = "[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n    2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n    5 - Ask about the bottle\n   6 - Leave"
         slow_print(start)
         choice = InputValidation.check6()
@@ -51,58 +57,57 @@ class Tareth():
         elif choice == "4":
             self.janet_rel()
         elif choice == "5":
-            self.bottle()
+            self.bottle(inventory)
         else:
-            main.MainRoom.main_room()
+            return
 
-    def contract_conversation(self):
+    def contract_conversation(self, inventory):
         self.start = "[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n    2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n    5 - Ask about the contract\n   6 - Leave\n"
         slow_print(self.start)
         self.choice = input("> ")
-        while self.choice not in ["1", "2", "3", "4","5","6"]:
+        while self.choice not in ["1", "2", "3", "4", "5", "6"]:
             print("Invalid, try again")
             self.reply = input("> ")
         if self.choice == "1":
-            self.issac_rel()
+            self.issac_rel(inventory)
         elif self.choice == "2":
-            self.william_rel()
+            self.william_rel(inventory)
         elif self.choice == "3":
-            self.mia_rel()
+            self.mia_rel(inventory)
         elif self.choice == "4":
-            self.janet_rel()
+            self.janet_rel(inventory)
         elif self.choice == "5":
-            self.contract()
+            self.contract(inventory)
         else:
-            main.MainRoom.main_room()
+            return
 
-    def contract_and_bottle_conversation(self):
+    def contract_and_bottle_conversation(self, inventory):
         self.start = "[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n    2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n    5 - Ask about the bottle\n   6 - Ask about the contract\n   6 - Leave\n"
         slow_print(self.start)
         self.choice = input("> ")
-        while self.choice not in ["1", "2", "3", "4","5","6"]:
+        while self.choice not in ["1", "2", "3", "4", "5", "6"]:
             print("Invalid, try again")
             self.reply = input("> ")
         if self.choice == "1":
-            self.issac_rel()
+            self.issac_rel(inventory)
         elif self.choice == "2":
-            self.william_rel()
+            self.william_rel(inventory)
         elif self.choice == "3":
-            self.mia_rel()
+            self.mia_rel(inventory)
         elif self.choice == "4":
-            self.janet_rel()
+            self.janet_rel(inventory)
         elif self.choice == "5":
-            self.bottle()
+            self.bottle(inventory)
         elif self.choice == "6":
-            self.contract()
+            self.contract(inventory)
         else:
-            main.MainRoom.main_room()
+            return
 
-
-    def issac_rel(self):
+    def issac_rel(self, inventory):
         self.response = "[TARETH]: We were good friends since college. We ended up going to the same university and when we finished, we knew we wanted to work together. So, we founded our company and everything went great for us. Only, now it's not. I guess it all started when he became distant. Ever since he got engaged, he's been spending less time around the office and less time on the company.\n    1 - Ask why he thinks they became distant\n    2 - Ask if he got angry at his friend abandoning him\n"
         slow_print(self.response)
         self.reply = input("> ")
-        while self.reply not in ["1","2"]:
+        while self.reply not in ["1", "2"]:
             print("Invalid, try again")
             self.reply = input("> ")
         if self.reply == "1":
@@ -110,14 +115,13 @@ class Tareth():
         else:
             self.response = "[YOU]: So, you were angry at him, because he chose her over you?\n\n[TARETH]: If you're trying to make it seem like I killed him, I didn't. Now, fuck off and go accuse someone else.\n"
         slow_print(self.response)
-        self.standard_conversation()
+        self.conversation_picker(inventory)
 
-
-    def william_rel(self):
+    def william_rel(self, inventory):
         self.response = "[TARETH]: The kid? I never liked him much. He's okay, but nothing special - too coddled by his mother and father to truly understand what it takes to succeed.\n   1 - Agree\n   2 - Disagree\n"
         slow_print(self.response)
         self.reply = input("> ")
-        while self.reply not in ["1","2"]:
+        while self.reply not in ["1", "2"]:
             print("Invalid, try again")
             self.reply = input("> ")
         if self.reply == "1":
@@ -125,14 +129,13 @@ class Tareth():
         else:
             self.response = "[YOU]: He's not that bad.\n\n[TARETH]: Hmm, thought you would've seen it like me. Nevermind.\n"
         slow_print(self.response)
-        self.standard_conversation()
+        self.conversation_picker(inventory)
 
-
-    def mia_rel(self):
+    def mia_rel(self, inventory):
         self.response = "[TARETH]: Her? Never really had much trouble with her to be honest. She was always the quiet one out of his kids. A talented artist, for sure, but she had little interest in her father's business\n   1 - Ask if she ever argued with her dad\n   2 - Say she sounds like a good kid\n"
         slow_print(self.response)
         self.reply = input("> ")
-        while self.reply not in ["1","2"]:
+        while self.reply not in ["1", "2"]:
             print("Invalid, try again")
             self.reply = input("> ")
         if self.reply == "1":
@@ -140,14 +143,13 @@ class Tareth():
         else:
             self.response = "[YOU]: She sounds like a good kid.\n\n[TARETH]: The better of the two, for sure. Shame though, she had what it took to take over from him.\n"
         slow_print(self.response)
-        self.standard_conversation()
+        self.conversation_picker(inventory)
 
-
-    def janet_rel(self):
+    def janet_rel(self, inventory):
         self.response = "[TARETH]: Oh... her. I never really liked her. From the moment we met in Issac's office, we never got along.\n   1 - Ask why\n   2 - Ask if he thinks she did it\n   3 - Say she can't be that bad\n"
         slow_print(self.response)
         self.reply = input("> ")
-        while self.reply not in ["1","2","3"]:
+        while self.reply not in ["1", "2", "3"]:
             print("Invalid, try again")
             self.reply = input("> ")
         if self.reply == "1":
@@ -165,9 +167,9 @@ class Tareth():
         else:
             self.response = "[YOU]: He's not that bad.\n\n[TARETH]: Hmm, thought you would've seen it like me. Nevermind.\n"
         slow_print(self.response)
-        self.standard_conversation()
+        self.conversation_picker(inventory)
 
-    def bottle(self):
+    def bottle(self, inventory):
         response = """
 [YOU]: I found this bottle in his study alongside a congratulations card.
 
@@ -212,13 +214,11 @@ class Tareth():
             slow_print(response)
         else:
             response = """
-No thanks. That bottle was meant to be for him - it would be bad of me to take it from him. Now, if you wouldn't mind, I'd like to be alone for a bit.
+[TARETH]: No thanks. That bottle was meant to be for him - it would be bad of me to take it from him. Now, if you wouldn't mind, I'd like to be alone for a bit.
 """
             slow_print(response)
 
-
-
-    def contract(self):
+    def contract(self, inventory):
         response = """
 [YOU]: I found this contract in his study safe. It has your signature on it, but not his. Care to explain?
 
@@ -236,7 +236,7 @@ No thanks. That bottle was meant to be for him - it would be bad of me to take i
         else:
             self.contract_safe()
 
-    def contract_reasoning(self):
+    def contract_reasoning(self, inventory):
         response = """
 [YOU]: What was so special about this deal?
 
