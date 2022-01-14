@@ -22,7 +22,9 @@ def start(inventory):
     main_room(inventory)
 
 def main_room(inventory):
-    prompt = """
+    choice = ""
+    while choice != "8":
+        slow_print("""
 You are in the dining room -what would you like to do?
     1 - Talk to William
     2 - Talk to Tareth
@@ -31,40 +33,40 @@ You are in the dining room -what would you like to do?
     5 - Talk to Janet
     6 - Head out to the hallway
     7 - View Inventory
-    8 - ACCUSE\n"""
-    slow_print(prompt)
-    choice = InputValidation.check7()
-    if choice == "1":
-        # william()
-        print("PLACE")
-    elif choice == "2":
-        Tareth.Tareth(inventory)
-    elif choice == "3":
-        # mia()
-        print("PLACE")
-    elif choice == "4":
-        # andrew()
-        print("PLACE")
-    elif choice == "5":
-        # janet(safe_pin)
-        print("PLACE")
-    elif choice == "6":
-        # self.hallway()
-        print("PLACE")
-    elif choice == "7":
-        Inventory.InventoryViewer(inventory)
-    else:
-        final_choice = input("""
-WARNING: THERE IS NO GOING BACK FROM THIS CHOICE - ARE YOU SURE THAT YOU ARE READY?
-    1 - Yes
-    2 - No
-    
-> """)
-        if final_choice == "1":
-            #Accuse
-            print("Place")
+    8 - ACCUSE\n""")
+        choice = InputValidation.check8()
+        if choice == "1":
+            # william()
+            print("PLACE")
+        elif choice == "2":
+            Tareth.Tareth(inventory)
+        elif choice == "3":
+            # mia()
+            print("PLACE")
+        elif choice == "4":
+            # andrew()
+            print("PLACE")
+        elif choice == "5":
+            # janet(safe_pin)
+            print("PLACE")
+        elif choice == "6":
+            # self.hallway()
+            print("PLACE")
+        elif choice == "7":
+            Inventory.InventoryViewer(inventory)
         else:
-            main_room(inventory)
+            final_choice = input("""
+    WARNING: THERE IS NO GOING BACK FROM THIS CHOICE - ARE YOU SURE THAT YOU ARE READY?
+        1 - Yes
+        2 - No
+        
+    > """)
+            if final_choice == "1":
+                #Accuse
+                print("Place")
+            else:
+                choice = ""
+
 
 def hallway(self):
         prompt = """

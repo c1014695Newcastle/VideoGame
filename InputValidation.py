@@ -1,3 +1,9 @@
+def check8():
+    choice = input("> ")
+    while choice not in ["1", "2", "3", "4", "5", "6", "7", "8"]:
+        choice = input("Invalid - Try again \n> ")
+    return choice
+
 def check7():
     choice = input("> ")
     while choice not in ["1", "2", "3", "4", "5", "6", "7"]:
