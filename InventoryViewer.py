@@ -12,11 +12,11 @@ class InventoryViewer:
 
     def __init__(self, inventory):
         if all(i == 0 for i in inventory):
-            print("1 - Notepad")
-            return
+            self.view_item()
         else:
             print("Your inventory items are:\n\t 1 - Notepad")
             filtered_list = {}
+            filtered_list[1] = "Notepad"
             n = 2
             for x in inventory:
                 if inventory[x] == 1:
@@ -24,6 +24,8 @@ class InventoryViewer:
                     print("\t", n, "-", filtered_list[n]) # expected output e.g: 1 - Study Key
 
                     n = n + 1
+            self.view_item()
+
 
     def view_item(self):
         item_choice = "hi"
