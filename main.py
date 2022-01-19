@@ -86,6 +86,6 @@ def hallway(self):
         else:
             self.main_room()
 
-
+progress = {}
 inventory = {"Notepad": 0, "Study Key": 0, "Safe Pin": 0, "Contract": 0, "Scotch Bottle": 0, "Wine Bottle": 0, "Password": 0}
 start(inventory)
