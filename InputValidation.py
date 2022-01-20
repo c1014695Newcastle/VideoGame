@@ -1,7 +1,6 @@
 def checkn(n):
     choice = input("> ")
-    test = [str(w) for w in range(1, n+1)]
-    while choice not in test:
+    while choice not in [str(w) for w in range(1, n+1)]:
         choice = input("Invalid - Try again \n> ")
     return choice
 
