@@ -1,12 +1,12 @@
 import sys, time
-import InputValidation, main
+import InputValidation
 
 
 def slow_print(message):
     for char in message:
         sys.stdout.write(char)
         sys.stdout.flush()
-        time.sleep(0.025)
+        time.sleep(0.00001)
 
 
 def contract_safe():
@@ -42,11 +42,11 @@ class Tareth:
         self.conversation_picker(inventory)
 
     def conversation_picker(self, inventory):
-        if inventory["bottle"] == 0 and inventory["contract"] == 0:
+        if inventory["Scotch Bottle"] == 0 and inventory["Contract"] == 0:
             self.standard_conversation(inventory)
-        elif inventory["bottle"] == 1 and inventory["contract"] == 0:
+        elif inventory["Scotch Bottle"] == 1 and inventory["Contract"] == 0:
             self.bottle_conversation(inventory)
-        elif inventory["bottle"] == 0 and inventory["contract"] == 1:
+        elif inventory["Scotch Bottle"] == 0 and inventory["Contract"] == 1:
             self.contract_conversation(inventory)
         else:
             self.contract_and_bottle_conversation(inventory)
@@ -56,35 +56,30 @@ class Tareth:
         slow_print(start)
         choice = InputValidation.check5()
         if choice == "1":
-            self.issac_rel()
-            main.main_room(inventory)
+            self.issac_rel(inventory)
         elif choice == "2":
-            self.william_rel()
-            main.main_room(inventory)
+            self.william_rel(inventory)
         elif choice == "3":
-            self.mia_rel()
-            main.main_room(inventory)
+            self.mia_rel(inventory)
         elif choice == "4":
-            self.janet_rel()
+            self.janet_rel(inventory)
         else:
-            main.main_room(inventory)
+            return inventory
 
     def bottle_conversation(self, inventory):
         start = "[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n    2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n    5 - Ask about the bottle\n   6 - Leave"
         slow_print(start)
         choice = InputValidation.check6()
         if choice == "1":
-            self.issac_rel()
+            self.issac_rel(inventory)
         elif choice == "2":
-            self.william_rel()
+            self.william_rel(inventory)
         elif choice == "3":
-            self.mia_rel()
+            self.mia_rel(inventory)
         elif choice == "4":
-            self.janet_rel()
+            self.janet_rel(inventory)
         elif choice == "5":
             self.bottle(inventory)
-        else:
-            return
 
     def contract_conversation(self, inventory):
         self.start = "[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n    2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n    5 - Ask about the contract\n   6 - Leave\n"
@@ -103,8 +98,6 @@ class Tareth:
             self.janet_rel(inventory)
         elif self.choice == "5":
             self.contract(inventory)
-        else:
-            return
 
     def contract_and_bottle_conversation(self, inventory):
         self.start = "[TARETH]: What do you want?\n   1 - Ask about relationship with Issac\n    2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Janet\n    5 - Ask about the bottle\n   6 - Ask about the contract\n   6 - Leave\n"
@@ -125,8 +118,7 @@ class Tareth:
             self.bottle(inventory)
         elif self.choice == "6":
             self.contract(inventory)
-        else:
-            return
+
 
     def issac_rel(self, inventory):
         self.response = "[TARETH]: We were good friends since college. We ended up going to the same university and when we finished, we knew we wanted to work together. So, we founded our company and everything went great for us. Only, now it's not. I guess it all started when he became distant. Ever since he got engaged, he's been spending less time around the office and less time on the company.\n    1 - Ask why he thinks they became distant\n    2 - Ask if he got angry at his friend abandoning him\n"
@@ -255,11 +247,11 @@ class Tareth:
         slow_print(response)
         choice = InputValidation.check3()
         if choice == "1":
-            self.contract_reasoning()
+            self.contract_reasoning(inventory)
         elif choice == "2":
-            self.contract_questioning()
+            self.contract_questioning(inventory)
         else:
-            contract_safe()
+            contract_safe(inventory)
 
     def contract_reasoning(self, inventory):
         response = """
@@ -301,7 +293,7 @@ class Tareth:
 """
         slow_print(response)
 
-    def contract_questioning(self):
+    def contract_questioning(self, inventory):
         response = """
 [YOU]: This can't be only kind of contract like this that came across your desk. What was so special about this one?
 
