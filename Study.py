@@ -1,5 +1,5 @@
 from main import slow_print, hallway
-import InputValidation
+import ReusedCode
 
 
 class StudyRoom:

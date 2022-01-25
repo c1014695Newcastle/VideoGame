@@ -1,7 +1,8 @@
 #Get the computer passcode from her
 import sys, time
-import InputValidation
+import ReusedCode
 from colorama import Fore
+from ReusedCode import slow_print, checkn
 
 
 def slow_print(message):
@@ -29,7 +30,7 @@ For what was supposed to be her and Issac's big night, it has certainly went sou
     def standard_conversation(self, inventory):
         start = Fore.MAGENTA + "\n[JANET]: What do you want?\n   1 - Ask about relationship with Issac\n   2 - Ask about relationship with William\n   3 - Ask about relationship with Mia\n   4 - Ask about relationship with Tareth\n   5 - Leave\n"
         slow_print(start)
-        choice = InputValidation.check5()
+        choice = checkn(5)
         if choice == "1":
             self.issac_rel(inventory)
         elif choice == "2":
