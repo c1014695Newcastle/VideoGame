@@ -44,7 +44,7 @@ You are in the dining room -what would you like to do?
             # self.hallway()
             print("PLACE")
         elif choice == "7":
-            InventoryViewer(inventory)
+            InventoryViewer(inventory, progress)
         else:
             final_choice = input("""
     WARNING: THERE IS NO GOING BACK FROM THIS CHOICE - ARE YOU SURE THAT YOU ARE READY?

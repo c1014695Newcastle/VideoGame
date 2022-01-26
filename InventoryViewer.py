@@ -1,23 +1,23 @@
 import sys, time
 from ReusedCode import slow_print, checkn
-
+from Notepad import notepad
 
 class InventoryViewer:
 
-    def __init__(self, inventory):
+    def __init__(self, inventory, progress):
         print("================================ INVENTORY ================================\n")
         if all(i == 0 for i in inventory):
             print("HERE")
         else:
             print("Your inventory items are:")
-            filtered_list = {1: "Notepad"}
-            n = 2
+            n = 1
+            filtered_list = {n: "Notepad"}
             for x in inventory:
                 if inventory[x] == 1:
                     filtered_list[n] = x
                     n = n + 1
             filtered_list[n+1] = "Return to game"
-            self.view_item(n, filtered_list, inventory)
+            self.view_item(n, filtered_list, inventory, progress)
 
     def item_picker(self, item, inventory):
         for w in inventory:
@@ -36,7 +36,7 @@ class InventoryViewer:
                     text = self.poison_view(inventory)
         slow_print(text)
 
-    def view_item(self, n, filtered_list, inventory):
+    def view_item(self, n, filtered_list, inventory, progress):
         choice = ""
         while choice != str(n):
             for u in filtered_list:
@@ -45,7 +45,7 @@ class InventoryViewer:
             choice = checkn(2)
             if choice == "1":
                 print("Place")
-                # Notepad.Notepad(progress_monitor)
+                notepad(progress)
             else:
                 for w in range(2,len(filtered_list) + 1):
                     for y in filtered_list:
